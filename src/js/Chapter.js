@@ -6,26 +6,29 @@ export default class Chapter {
         this._attackDistance = 1;
     }
     get attack() {
-        return this._attack;
+        let attackResult = this._attack;
+
+        if(this._stoned) {
+            attackResult = attackResult - Math.log2(this._attackDistance) * 5;
+        }
+
+        if(this._attackDistance <= 1 || this._attackDistance > 9) {
+            return attackResult;
+        }
+
+        return attackResult - ((this._attackDistance - 1) * 10);
     }
     set attack(value) {
-        if(value <= 1 || value > 9) {
-            this._attack = 100;
+        if(value < 1 || value > 9) {
             return false;
         }
     
         this._attackDistance = value;
-        this._attack = this._attack - ((this._attackDistance - 1) * 10);
     }
     get stoned() {
         return this._stoned;
     }
     set stoned(value) {
-        if(value === true) {
-            this._stoned = true;
-            this._attack = this._attack - Math.log2(this._attackDistance) * 5;
-        } else {
-            this._attack = 100;
-        }
+        this._stoned = value;
     }
 }

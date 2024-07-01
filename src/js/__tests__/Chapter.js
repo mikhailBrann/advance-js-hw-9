@@ -25,5 +25,5 @@ test('Chapter stonned test', () => {
     expect(testObj.stoned).toEqual(true);
 
     testObj.stoned = false;
-    expect(testObj.attack).toEqual(100);
+    expect(testObj.attack).toEqual(90);
 });
